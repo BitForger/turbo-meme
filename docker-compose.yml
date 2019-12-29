@@ -1,0 +1,14 @@
+version: '3'
+services:
+  keystone:
+    build: .
+    env_file: .env
+    command: 'yarn run dev'
+    ports:
+    - 3000:3000
+    volumes:
+    - "./lists:/var/www/app/lists"
+    - "./index.js:/var/www/app/index.js"
+    - "./package.json:/var/www/app/package.json"
+    - "./yarn.lock:/var/www/app/yarn.lock"
+    - "./node_modules/keystone-file-adapter-s3:/var/www/app/node_modules/keystone-file-adapter-s3"
