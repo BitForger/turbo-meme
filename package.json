@@ -26,6 +26,6 @@
     "@keystonejs/list-plugins": "^5.0.2",
     "@keystonejs/apollo-helpers": "^5.0.5",
     "cross-env": "^5.2.0",
-    "@bitforger/keystone-file-adapter-s3": "1.0.2"
+    "@bitforger/keystone-file-adapter-s3": "1.0.3"
   }
 }
