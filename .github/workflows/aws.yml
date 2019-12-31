@@ -51,6 +51,10 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
+    - name: Configure NPM Registry
+      id: config-npm
+      run: echo '//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_PERSONAL_ACCESS_TOKEN}} \nregistry=https://npm.pkg.github.com/bitforger' >> .npmrc
+
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
