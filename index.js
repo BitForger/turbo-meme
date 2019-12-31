@@ -11,9 +11,7 @@ const PROJECT_NAME = "gkovacs-cms";
 
 const keystone = new Keystone({
   name: PROJECT_NAME,
-  adapter: new Adapter({
-    mongoUri: 'mongodb+srv://bitforgers-api:53UtGWAlxWvrPq4e@bitforgers-api-dyscd.mongodb.net/gkovacs-cms?retryWrites=true&w=majority',
-  }),
+  adapter: new Adapter(),
   onConnect: initialiseData,
 });
 
