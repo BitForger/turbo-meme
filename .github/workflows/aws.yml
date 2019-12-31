@@ -54,10 +54,8 @@ jobs:
     - name: Configure NPM Registry
       id: config-npm
       run: |
-        echo <<< EOL
-        //npm.pkg.github.com/:_authToken=${{secrets.GITHUB_PERSONAL_ACCESS_TOKEN}}
-        registry=https://npm.pkg.github.com/bitforger'
-        EOL >> .npmrc
+        echo '//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_PERSONAL_ACCESS_TOKEN}}' > .npmrc
+        echo 'registry=https://npm.pkg.github.com/bitforger' > .npmrc
         cat .npmrc
 
     - name: Build, tag, and push image to Amazon ECR
