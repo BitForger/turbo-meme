@@ -54,8 +54,10 @@ jobs:
     - name: Configure NPM Registry
       id: config-npm
       run: |
-        echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_PERSONAL_ACCESS_TOKEN}}" > .npmrc
-        echo "registry=https://npm.pkg.github.com/bitforger" > .npmrc
+        echo "always-auth=true" > .npmrc
+        echo "@bitforger:registry=https://npm.pkg.github.com" >> .npmrc
+        echo "_authToken=${{secrets.GITHUB_PERSONAL_ACCESS_TOKEN}}" >> .npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_PERSONAL_ACCESS_TOKEN}}" >> .npmrc
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
@@ -67,9 +69,11 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build --no-cache -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker build --no-cache --build-arg S3_ACCESS_KEY_ID_ARG=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg S3_SECRET_ACCESS_KEY_ARG=${{secrets.AWS_SECRET_ACCESS_KEY}} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        docker tag $ECR_REGISTRY/$ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def

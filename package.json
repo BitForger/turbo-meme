@@ -1,6 +1,6 @@
 {
-  "name": "@keystonejs/example-projects-starter",
-  "description": "An example KeystoneJS project with a User list and Authentication.",
+  "name": "gkovacs-cms",
+  "description": "A custom CMS based on the Keystone starter",
   "private": true,
   "version": "5.0.1",
   "author": "The KeystoneJS Development Team",
@@ -26,6 +26,6 @@
     "@keystonejs/list-plugins": "^5.0.2",
     "@keystonejs/apollo-helpers": "^5.0.5",
     "cross-env": "^5.2.0",
-    "@bitforger/keystone-file-adapter-s3": "1.0.3"
+    "@bitforger/keystone-file-adapter-s3": "^1.0.3"
   }
 }

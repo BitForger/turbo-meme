@@ -11,8 +11,12 @@ const PROJECT_NAME = "gkovacs-cms";
 
 const keystone = new Keystone({
   name: PROJECT_NAME,
-  adapter: new Adapter(),
+  adapter: new Adapter({
+    mongoUri: process.env.MONGO_URI
+  }),
   onConnect: initialiseData,
+  cookieSecret: process.env.COOKIE_SECRET,
+  secureCookies: false,
 });
 
 const imageSchema = require('./lists/images');

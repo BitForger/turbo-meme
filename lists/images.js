@@ -7,6 +7,7 @@ const s3Adapter = new S3Adapter({
     region: 'us-east-1',
     bucket: 'listing-images-gkovacs',
     folder: 'img',
+    publicUrl: ({id, filename, _meta}) => `https://img.georgiakovacsrealty.com/${filename}`
 });
 
 const cloudinaryAdapter = new CloudinaryAdapter({

@@ -24,5 +24,12 @@ module.exports = {
     },
     plugins: [
         atTracking()
-    ]
+    ],
+    queryLimits: {
+        maxResults: 100,
+    },
+    cacheControl: {
+        scope: 'PUBLIC',
+        defaultMaxAge: 3600,
+    }
 };

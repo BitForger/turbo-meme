@@ -1,0 +1,13 @@
+FROM node:dubnium
+WORKDIR /home/node
+
+COPY package.json .
+COPY yarn.lock .
+COPY .npmrc .
+
+RUN yarn install --update-checksums && yarn cache clean
+
+ADD . .
+
+EXPOSE 3000
+CMD ["yarn","dev"]
