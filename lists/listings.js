@@ -11,6 +11,7 @@ module.exports = {
             type: Text,
             isRequired: true,
             label: 'MLS #',
+            isUnique: true
         },
         images: {
             type: Relationship,
@@ -19,7 +20,14 @@ module.exports = {
         },
         shareableUrl: {
             type: Slug,
-            generate: ({resolvedData}) => `https://georgiakovacsrealty.com/listing/${resolvedData.mlsNumber}`
+            generate: ({resolvedData, existingItem}) => {
+                if (resolvedData.mlsNumber) {
+                    return `https://georgiakovacsrealty.com/listing/${resolvedData.mlsNumber}`;
+                } else {
+                    return existingItem.shareableUrl;
+                }
+
+            }
         }
     },
     plugins: [
